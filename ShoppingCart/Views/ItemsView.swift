@@ -8,11 +8,28 @@
 import SwiftUI
 
 struct ItemsView: View {
+    
+    @State private var isCartViewPresented: Bool = false
+    
     private let items: [String] = (0..<10).map { ("Item_\($0)") }
     
     var body: some View {
         itemsListView
-            .navigationTitle("Items")
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading, content: { titleView })
+                ToolbarItem(placement: .topBarTrailing, content: { cartButtonView })
+            }
+            .navigationDestination(isPresented: $isCartViewPresented, destination: {
+                CartView()
+            })
+    }
+}
+
+// MARK: - Actions
+
+private extension ItemsView {
+    func onCartTap() {
+        isCartViewPresented = true
     }
 }
 
@@ -28,6 +45,19 @@ private extension ItemsView {
         .buttonStyle(.plain)
         
         .padding(.vertical, 20)
+    }
+    
+    var titleView: some View {
+        Text("Items")
+            .font(.system(size: 30, weight: .semibold))
+            .padding(.leading, 18)
+    }
+    
+    var cartButtonView: some View {
+        Button(action: onCartTap) {
+            Image(systemName: "cart")
+                .foregroundStyle(Color.black)
+        }
     }
 }
 

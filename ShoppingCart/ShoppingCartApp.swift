@@ -25,7 +25,9 @@ struct ShoppingCartApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ItemsView()
+            NavigationStack {
+                ItemsView()
+            }
         }
         .modelContainer(sharedModelContainer)
     }
