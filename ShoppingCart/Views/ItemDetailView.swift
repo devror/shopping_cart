@@ -10,15 +10,22 @@ import SwiftUI
 struct ItemDetailView: View {
     @Environment(\.dismiss) private var dismiss
     
-    @StateObject private var viewModel = ItemDetailViewModel()
+    @StateObject private var viewModel: ItemDetailViewModel
     
-    let itemID: Int
+    init(itemID: Int) {
+        _viewModel = StateObject(wrappedValue: ItemDetailViewModel(itemID: itemID))
+    }
     
     var body: some View {
-        if viewModel.isLoading {
-            ProgressView()
-        } else {
-            contentView
+        Group {
+            if viewModel.isLoading {
+                ProgressView()
+            } else {
+                contentView
+            }
+        }
+        .task {
+            await viewModel.load()
         }
     }
 }
