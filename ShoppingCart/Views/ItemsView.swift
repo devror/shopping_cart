@@ -22,11 +22,7 @@ struct ItemsView: View {
             if isLoading {
                 ProgressView()
             } else {
-                if viewModel.items.isEmpty {
-                    Text("No Items")
-                } else {
-                    itemsListView
-                }
+                itemsListView
             }
         }
         .toolbar {
@@ -56,20 +52,26 @@ private extension ItemsView {
 // MARK: - Subviews
 
 private extension ItemsView {
+    
+    @ViewBuilder
     var itemsListView: some View {
-        List(viewModel.items) { item in
-            let existedItem = cartItems.first(where: { $0.id == item.id })
-            
-            ItemView(item: existedItem ?? item)
-                .listRowBackground(Color.white)
-                .onTapGesture {
-                    viewModel.selectedItem = item
-                    isItemDetailViewPresented = true
-                }
+        if viewModel.items.isEmpty {
+            Text("No Items")
+        } else {
+            List(viewModel.items) { item in
+                let existedItem = cartItems.first(where: { $0.id == item.id })
+                
+                ItemView(item: existedItem ?? item)
+                    .listRowBackground(Color.white)
+                    .onTapGesture {
+                        viewModel.selectedItem = item
+                        isItemDetailViewPresented = true
+                    }
+            }
+            .listStyle(.plain)
+            .buttonStyle(.plain)
+            .padding(.vertical, 20)
         }
-        .listStyle(.plain)
-        .buttonStyle(.plain)
-        .padding(.vertical, 20)
     }
     
     var titleView: some View {

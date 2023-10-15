@@ -34,17 +34,22 @@ private extension CartView {
             .padding(.leading, 18)
     }
     
+    @ViewBuilder
     var itemsListView: some View {
-        List(items, id: \.self) { item in
-            ItemView(item: item)
-                .listRowBackground(Color.white)
+        if items.isEmpty {
+            Text("Cart is empty")
+        } else {
+            List(items, id: \.self) { item in
+                ItemView(item: item)
+                    .listRowBackground(Color.white)
+            }
+            .listStyle(.plain)
+            .buttonStyle(.plain)
+            .safeAreaInset(edge: .bottom, content: {
+                itemsTotalView
+            })
+            .padding(.vertical, 20)
         }
-        .listStyle(.plain)
-        .buttonStyle(.plain)
-        .safeAreaInset(edge: .bottom, content: {
-            itemsTotalView
-        })
-        .padding(.vertical, 20)
     }
     
     var itemsTotalView: some View {
