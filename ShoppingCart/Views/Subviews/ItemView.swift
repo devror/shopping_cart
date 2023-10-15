@@ -11,6 +11,8 @@ struct ItemView: View {
     
     @Environment(\.modelContext) private var modelContext
     
+    @State var isAlertPresented = false
+    
     let item: Item
     
     var body: some View {
@@ -28,12 +30,16 @@ struct ItemView: View {
                         .transition(.asymmetric(insertion: .scale.animation(.easeInOut), removal: .opacity.animation(.easeInOut)))
                 }
             }
-            
         }
         .listRowSeparator(.hidden)
         .padding(16)
         .background(Color("FCFCFC"))
         .listRowInsets(.init(top: 4, leading: 24, bottom: 4, trailing: 24))
+        .alert("Error", isPresented: $isAlertPresented) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text("Something went wrong. Please try again later.")
+        }
     }
 }
 
@@ -59,13 +65,14 @@ private extension ItemView {
     func addToCart() {
         item.count = 1
         modelContext.insert(item)
+        save()
     }
     
     func save() {
         do {
             try modelContext.save()
         } catch {
-            print("Error: \(error.localizedDescription)")
+            isAlertPresented = true
         }
     }
 }

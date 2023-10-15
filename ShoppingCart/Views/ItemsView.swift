@@ -33,10 +33,12 @@ struct ItemsView: View {
             CartView()
         })
         .sheet(isPresented: $isItemDetailViewPresented, content: { itemDetailView })
+        .alert(isPresented: $viewModel.isAlertPresented, error: viewModel.error, actions: {
+            Button("Cancel", role: .cancel) {}
+            Button("Retry") { loadData() }
+        })
         .task {
-            isLoading = true
-            await viewModel.load()
-            isLoading = false
+            await loadData()
         }
     }
 }
@@ -46,6 +48,18 @@ struct ItemsView: View {
 private extension ItemsView {
     func onCartTap() {
         isCartViewPresented = true
+    }
+    
+    func loadData() {
+        Task {
+            await loadData()
+        }
+    }
+    
+    func loadData() async {
+        isLoading = true
+        await viewModel.load()
+        isLoading = false
     }
 }
 

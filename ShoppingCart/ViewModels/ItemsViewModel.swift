@@ -7,10 +7,21 @@
 
 import Foundation
 
+enum ItemsViewModelError: LocalizedError {
+    case cannotFetchItems
+    
+    var errorDescription: String? {
+        "Something went wrong. Please try again"
+    }
+}
+
 class ItemsViewModel: ObservableObject {
     
     @Published var items = [Item]()
     @Published var selectedItem: Item?
+    
+    @Published var isAlertPresented = false
+    @Published var error: ItemsViewModelError?
     
     private let apiEndpointURL = "https://dummyjson.com/products"
     
@@ -21,6 +32,7 @@ class ItemsViewModel: ObservableObject {
             let (data, response) = try await URLSession.shared.data(from: url)
             
             guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                presentError()
                 return
             }
             
@@ -30,11 +42,15 @@ class ItemsViewModel: ObservableObject {
                 self?.items = productsResponse.products
             }
         } catch {
-            print("Error: \(error.localizedDescription)")
-            
-            DispatchQueue.main.async { [weak self] in
-                self?.items = []
-            }
+            presentError()
+        }
+    }
+    
+    private func presentError() {
+        DispatchQueue.main.async { [weak self] in
+            self?.isAlertPresented = true
+            self?.error = .cannotFetchItems
+            self?.items = []
         }
     }
 }
