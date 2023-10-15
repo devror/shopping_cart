@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct ItemView: View {
-    @State var count: Int = 0
-    
     let item: Item
     
     var body: some View {
@@ -19,7 +17,7 @@ struct ItemView: View {
             Spacer()
             
             Group {
-                if count > 0 {
+                if item.count > 0 {
                     countView
                         .transition(.asymmetric(insertion: .scale.animation(.easeInOut), removal: .opacity.animation(.easeInOut)))
                 } else {
@@ -39,15 +37,15 @@ struct ItemView: View {
 // MARK: - Actions
 private extension ItemView {
     func onMinusTap() {
-        count -= 1
+        item.count -= 1
     }
     
     func onPlusTap() {
-        count += 1
+        item.count += 1
     }
     
     func addToCart() {
-        count = 1
+        item.count = 1
     }
 }
 
@@ -76,7 +74,7 @@ private extension ItemView {
             Text("$\(item.price)")
                 .foregroundStyle(Color("B3B3B3"))
             
-            Text(item.description)
+            Text(item.itemDescription)
         }
         .font(.system(size: 12))
         .padding(.vertical, 4)
@@ -99,7 +97,7 @@ private extension ItemView {
                 .fill(Color("F5F6F6"))
                 .frame(width: 30, height: 30)
                 .overlay {
-                    Text("\(count)")
+                    Text("\(item.count)")
                         .fontWeight(.semibold)
                 }
             
@@ -115,5 +113,5 @@ private extension ItemView {
 }
 
 #Preview {
-    ItemView(item: .init(id: 1, title: "Title", description: "Description", thumbnail: "", price: 100))
+    ItemView(item: .init(id: 1, title: "Title", itemDescription: "Description", thumbnail: "", price: 100, count: 0))
 }

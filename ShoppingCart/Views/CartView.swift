@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct CartView: View {
-    
     @Environment(\.dismiss) private var dismiss
     
-    private let items: [String] = (0..<2).map { ("Item_\($0)") }
+    @Environment(\.modelContext) private var modelContext
+    @Query private var items: [Item]
     
     var body: some View {
         itemsListView
@@ -35,7 +36,7 @@ private extension CartView {
     
     var itemsListView: some View {
         List(items, id: \.self) { item in
-            ItemView(count: 1, item: .init(id: 1, title: "t", description: "d", thumbnail: "", price: 1))
+            ItemView(item: item)
                 .listRowBackground(Color.white)
         }
         .listStyle(.plain)
