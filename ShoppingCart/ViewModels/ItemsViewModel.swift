@@ -10,6 +10,7 @@ import Foundation
 class ItemsViewModel: ObservableObject {
     
     @Published var items = [Item]()
+    @Published var selectedItem: Item?
     
     private let apiEndpointURL = "https://dummyjson.com/products"
     

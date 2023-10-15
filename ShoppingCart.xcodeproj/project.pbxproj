@@ -19,6 +19,7 @@
 		9DFBC31A2ADBB42A004B3D67 /* ItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFBC3192ADBB42A004B3D67 /* ItemDetailView.swift */; };
 		9DFBC31C2ADBB61D004B3D67 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFBC31B2ADBB61D004B3D67 /* CloseButton.swift */; };
 		9DFBC31F2ADBBFAB004B3D67 /* ItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFBC31E2ADBBFAB004B3D67 /* ItemsViewModel.swift */; };
+		9DFBC3212ADBC45D004B3D67 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFBC3202ADBC45D004B3D67 /* AsyncImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		9DFBC3192ADBB42A004B3D67 /* ItemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailView.swift; sourceTree = "<group>"; };
 		9DFBC31B2ADBB61D004B3D67 /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		9DFBC31E2ADBBFAB004B3D67 /* ItemsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewModel.swift; sourceTree = "<group>"; };
+		9DFBC3202ADBC45D004B3D67 /* AsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 			children = (
 				9DFBC3132ADBA2E0004B3D67 /* ItemView.swift */,
 				9DFBC31B2ADBB61D004B3D67 /* CloseButton.swift */,
+				9DFBC3202ADBC45D004B3D67 /* AsyncImageView.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -190,6 +193,7 @@
 				9DFBC3002ADB9913004B3D67 /* ContentView.swift in Sources */,
 				9DFBC31A2ADBB42A004B3D67 /* ItemDetailView.swift in Sources */,
 				9DFBC3022ADB9913004B3D67 /* Item.swift in Sources */,
+				9DFBC3212ADBC45D004B3D67 /* AsyncImageView.swift in Sources */,
 				9DFBC2FE2ADB9913004B3D67 /* ShoppingCartApp.swift in Sources */,
 				9DFBC3142ADBA2E0004B3D67 /* ItemView.swift in Sources */,
 				9DFBC31C2ADBB61D004B3D67 /* CloseButton.swift in Sources */,

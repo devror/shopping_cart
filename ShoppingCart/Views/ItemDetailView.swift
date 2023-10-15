@@ -10,6 +10,8 @@ import SwiftUI
 struct ItemDetailView: View {
     @Environment(\.dismiss) private var dismiss
     
+    let item: Item
+    
     var body: some View {
         GeometryReader { proxy in
             VStack(alignment: .leading, spacing: 24) {
@@ -17,7 +19,6 @@ struct ItemDetailView: View {
                 imageView(viewSize: proxy.size.width)
                 contentView
             }
-            .frame(width: proxy.size.width, height: proxy.size.height)
         }
         .padding(24)
     }
@@ -27,26 +28,26 @@ struct ItemDetailView: View {
 
 private extension ItemDetailView {
     func imageView(viewSize: CGFloat) -> some View {
-        Image("")
+        AsyncImageView(url: item.thumbnail, fill: true)
             .frame(width: viewSize, height: viewSize)
-            .background(Color.secondary.opacity(0.5))
+            .clipped()
     }
     
     var contentView: some View {
         VStack(alignment: .leading, spacing: 14) {
-            Text("Item Name")
+            Text(item.title)
                 .font(.system(size: 30, weight: .semibold))
             
-            Text("$10")
+            Text("$\(item.price)")
                 .font(.system(size: 30))
                 .foregroundStyle(Color("B3B3B3"))
             
-            Text("Attractive DesignMetallic materialFour key hooksReliable & DurablePremium Quality")
+            Text(item.itemDescription)
                 .font(.system(size: 20))
         }
     }
 }
 
 #Preview {
-    ItemDetailView()
+    ItemDetailView(item: .init(id: 1, title: "t", itemDescription: "d", thumbnail: "", images: [], price: 1, count: 0))
 }

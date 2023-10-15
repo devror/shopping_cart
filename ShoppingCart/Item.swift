@@ -14,14 +14,16 @@ final class Item: Decodable, Identifiable {
     var title: String
     var itemDescription: String
     var thumbnail: String
+    var images: [String]
     var price: Int
     var count: Int = 0
     
-    init(id: Int, title: String, itemDescription: String, thumbnail: String, price: Int, count: Int) {
+    init(id: Int, title: String, itemDescription: String, thumbnail: String, images: [String], price: Int, count: Int) {
         self.id = id
         self.title = title
         self.itemDescription = itemDescription
         self.thumbnail = thumbnail
+        self.images = images
         self.price = price
         self.count = count
     }
@@ -31,6 +33,7 @@ final class Item: Decodable, Identifiable {
         case title
         case itemDescription = "description"
         case thumbnail
+        case images
         case price
     }
     
@@ -40,6 +43,7 @@ final class Item: Decodable, Identifiable {
         self.title = try container.decode(String.self, forKey: .title)
         self.itemDescription = try container.decode(String.self, forKey: .itemDescription)
         self.thumbnail = try container.decode(String.self, forKey: .thumbnail)
+        self.images = try container.decode([String].self, forKey: .images)
         self.price = try container.decode(Int.self, forKey: .price)
     }
 }

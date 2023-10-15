@@ -52,18 +52,9 @@ private extension ItemView {
 // MARK: - Subviews
 private extension ItemView {
     var imageView: some View {
-        AsyncImage(url: URL(string: item.thumbnail)) { phase in
-            if let image = phase.image {
-                image
-                    .resizable()
-                    .scaledToFit()
-            } else if phase.error != nil {
-                Color.secondary.opacity(0.5)
-            } else {
-                ProgressView()
-            }
-        }
-        .frame(width: 58, height: 58)
+        AsyncImageView(url: item.thumbnail)
+            .frame(width: 58, height: 58)
+            .clipped()
     }
     
     var contentView: some View {
@@ -113,5 +104,5 @@ private extension ItemView {
 }
 
 #Preview {
-    ItemView(item: .init(id: 1, title: "Title", itemDescription: "Description", thumbnail: "", price: 100, count: 0))
+    ItemView(item: .init(id: 1, title: "Title", itemDescription: "Description", thumbnail: "", images: [], price: 100, count: 0))
 }

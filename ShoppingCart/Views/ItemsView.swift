@@ -34,9 +34,7 @@ struct ItemsView: View {
         .navigationDestination(isPresented: $isCartViewPresented, destination: {
             CartView()
         })
-        .sheet(isPresented: $isItemDetailViewPresented, content: {
-            ItemDetailView()
-        })
+        .sheet(isPresented: $isItemDetailViewPresented, content: { itemDetailView })
         .task {
             isLoading = true
             await viewModel.load()
@@ -61,6 +59,7 @@ private extension ItemsView {
             ItemView(item: item)
                 .listRowBackground(Color.white)
                 .onTapGesture {
+                    viewModel.selectedItem = item
                     isItemDetailViewPresented = true
                 }
         }
@@ -81,6 +80,15 @@ private extension ItemsView {
                 .foregroundStyle(Color.black)
         }
         .disabled(isLoading)
+    }
+    
+    @ViewBuilder
+    var itemDetailView: some View {
+        if let selectedItem = viewModel.selectedItem {
+            ItemDetailView(item: selectedItem)
+        } else {
+            Text("No selected item")
+        }
     }
 }
 
