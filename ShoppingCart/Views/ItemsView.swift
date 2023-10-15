@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ItemsView: View {
     
     @StateObject private var viewModel = ItemsViewModel()
+    @Query private var cartItems: [Item]
     
     @State private var isLoading = false
     @State private var isCartViewPresented = false
@@ -56,7 +58,9 @@ private extension ItemsView {
 private extension ItemsView {
     var itemsListView: some View {
         List(viewModel.items) { item in
-            ItemView(item: item)
+            let existedItem = cartItems.first(where: { $0.id == item.id })
+            
+            ItemView(item: existedItem ?? item)
                 .listRowBackground(Color.white)
                 .onTapGesture {
                     viewModel.selectedItem = item

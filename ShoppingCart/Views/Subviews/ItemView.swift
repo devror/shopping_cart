@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ItemView: View {
+    
+    @Environment(\.modelContext) private var modelContext
+    
     let item: Item
     
     var body: some View {
@@ -38,14 +41,32 @@ struct ItemView: View {
 private extension ItemView {
     func onMinusTap() {
         item.count -= 1
+        
+        if item.count == 0 {
+            withAnimation {
+                modelContext.delete(item)
+            }
+        } else {
+            save()
+        }
     }
     
     func onPlusTap() {
         item.count += 1
+        save()
     }
     
     func addToCart() {
         item.count = 1
+        modelContext.insert(item)
+    }
+    
+    func save() {
+        do {
+            try modelContext.save()
+        } catch {
+            print("Error: \(error.localizedDescription)")
+        }
     }
 }
 
