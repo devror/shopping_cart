@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		9DFBC2FE2ADB9913004B3D67 /* ShoppingCartApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFBC2FD2ADB9913004B3D67 /* ShoppingCartApp.swift */; };
-		9DFBC3002ADB9913004B3D67 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFBC2FF2ADB9913004B3D67 /* ContentView.swift */; };
 		9DFBC3022ADB9913004B3D67 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFBC3012ADB9913004B3D67 /* Item.swift */; };
 		9DFBC3042ADB9914004B3D67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DFBC3032ADB9914004B3D67 /* Assets.xcassets */; };
 		9DFBC3072ADB9914004B3D67 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DFBC3062ADB9914004B3D67 /* Preview Assets.xcassets */; };
@@ -25,7 +24,6 @@
 /* Begin PBXFileReference section */
 		9DFBC2FA2ADB9913004B3D67 /* ShoppingCart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingCart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DFBC2FD2ADB9913004B3D67 /* ShoppingCartApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartApp.swift; sourceTree = "<group>"; };
-		9DFBC2FF2ADB9913004B3D67 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9DFBC3012ADB9913004B3D67 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		9DFBC3032ADB9914004B3D67 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9DFBC3062ADB9914004B3D67 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -72,7 +70,6 @@
 				9DFBC31D2ADBBFA2004B3D67 /* ViewModels */,
 				9DFBC3112ADBA29F004B3D67 /* Views */,
 				9DFBC2FD2ADB9913004B3D67 /* ShoppingCartApp.swift */,
-				9DFBC2FF2ADB9913004B3D67 /* ContentView.swift */,
 				9DFBC30F2ADB9F47004B3D67 /* Colors.xcassets */,
 				9DFBC3012ADB9913004B3D67 /* Item.swift */,
 				9DFBC3032ADB9914004B3D67 /* Assets.xcassets */,
@@ -190,7 +187,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DFBC3162ADBAA64004B3D67 /* CartView.swift in Sources */,
-				9DFBC3002ADB9913004B3D67 /* ContentView.swift in Sources */,
 				9DFBC31A2ADBB42A004B3D67 /* ItemDetailView.swift in Sources */,
 				9DFBC3022ADB9913004B3D67 /* Item.swift in Sources */,
 				9DFBC3212ADBC45D004B3D67 /* AsyncImageView.swift in Sources */,
