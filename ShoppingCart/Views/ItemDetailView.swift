@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct ItemDetailView: View {
+    @Environment(\.dismiss) private var dismiss
+    
     var body: some View {
         GeometryReader { proxy in
             VStack(alignment: .leading, spacing: 24) {
-                CloseButton() {}
+                CloseButton() { dismiss() }
                 imageView(viewSize: proxy.size.width)
                 contentView
             }

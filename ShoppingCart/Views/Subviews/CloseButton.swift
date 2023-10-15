@@ -11,9 +11,11 @@ struct CloseButton: View {
     let action: () -> Void
     
     var body: some View {
-        Image(systemName: "xmark")
-            .foregroundStyle(Color.black)
-            .fontWeight(.semibold)
+        Button(action: action) {
+            Image(systemName: "xmark")
+                .foregroundStyle(Color.black)
+                .fontWeight(.semibold)
+        }
     }
 }
 
