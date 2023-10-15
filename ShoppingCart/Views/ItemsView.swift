@@ -105,7 +105,7 @@ private extension ItemsView {
     @ViewBuilder
     var itemDetailView: some View {
         if let selectedItem = viewModel.selectedItem {
-            ItemDetailView(item: selectedItem)
+            ItemDetailView(itemID: selectedItem.id)
         } else {
             Text("No selected item")
         }

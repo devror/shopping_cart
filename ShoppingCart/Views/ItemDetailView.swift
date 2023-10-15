@@ -10,30 +10,46 @@ import SwiftUI
 struct ItemDetailView: View {
     @Environment(\.dismiss) private var dismiss
     
-    let item: Item
+    @StateObject private var viewModel = ItemDetailViewModel()
+    
+    let itemID: Int
     
     var body: some View {
-        GeometryReader { proxy in
-            VStack(alignment: .leading, spacing: 24) {
-                CloseButton() { dismiss() }
-                imageView(viewSize: proxy.size.width)
-                contentView
-            }
+        if viewModel.isLoading {
+            ProgressView()
+        } else {
+            contentView
         }
-        .padding(24)
     }
 }
 
 // MARK: - Subviews
 
 private extension ItemDetailView {
-    func imageView(viewSize: CGFloat) -> some View {
+    
+    @ViewBuilder
+    var contentView: some View {
+        if let item = viewModel.item {
+            GeometryReader { proxy in
+                VStack(alignment: .leading, spacing: 24) {
+                    CloseButton() { dismiss() }
+                    imageView(item: item, viewSize: proxy.size.width)
+                    contentView(item: item)
+                }
+            }
+            .padding(24)
+        } else {
+            Text("No Data")
+        }
+    }
+    
+    func imageView(item: Item, viewSize: CGFloat) -> some View {
         AsyncImageView(url: item.thumbnail, fill: true)
             .frame(width: viewSize, height: viewSize)
             .clipped()
     }
     
-    var contentView: some View {
+    func contentView(item: Item) -> some View {
         VStack(alignment: .leading, spacing: 14) {
             Text(item.title)
                 .font(.system(size: 30, weight: .semibold))
@@ -49,5 +65,5 @@ private extension ItemDetailView {
 }
 
 #Preview {
-    ItemDetailView(item: .init(id: 1, title: "t", itemDescription: "d", thumbnail: "", images: [], price: 1, count: 0))
+    ItemDetailView(itemID: 1)
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D61180A2ADC63270086FE8A /* ItemDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6118092ADC63270086FE8A /* ItemDetailViewModel.swift */; };
 		9DFBC2FE2ADB9913004B3D67 /* ShoppingCartApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFBC2FD2ADB9913004B3D67 /* ShoppingCartApp.swift */; };
 		9DFBC3022ADB9913004B3D67 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFBC3012ADB9913004B3D67 /* Item.swift */; };
 		9DFBC3042ADB9914004B3D67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DFBC3032ADB9914004B3D67 /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9D6118092ADC63270086FE8A /* ItemDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailViewModel.swift; sourceTree = "<group>"; };
 		9DFBC2FA2ADB9913004B3D67 /* ShoppingCart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingCart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DFBC2FD2ADB9913004B3D67 /* ShoppingCartApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartApp.swift; sourceTree = "<group>"; };
 		9DFBC3012ADB9913004B3D67 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				9DFBC31E2ADBBFAB004B3D67 /* ItemsViewModel.swift */,
+				9D6118092ADC63270086FE8A /* ItemDetailViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 				9DFBC3212ADBC45D004B3D67 /* AsyncImageView.swift in Sources */,
 				9DFBC2FE2ADB9913004B3D67 /* ShoppingCartApp.swift in Sources */,
 				9DFBC3142ADBA2E0004B3D67 /* ItemView.swift in Sources */,
+				9D61180A2ADC63270086FE8A /* ItemDetailViewModel.swift in Sources */,
 				9DFBC31C2ADBB61D004B3D67 /* CloseButton.swift in Sources */,
 				9DFBC30E2ADB9964004B3D67 /* ItemsView.swift in Sources */,
 				9DFBC31F2ADBBFAB004B3D67 /* ItemsViewModel.swift in Sources */,
