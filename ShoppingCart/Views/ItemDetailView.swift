@@ -38,9 +38,11 @@ private extension ItemDetailView {
     var contentView: some View {
         if let item = viewModel.item {
             GeometryReader { proxy in
+                let imageSize = min(proxy.size.width, proxy.size.height * 0.65)
+                
                 VStack(alignment: .leading, spacing: 24) {
                     CloseButton() { dismiss() }
-                    imageView(item: item, viewSize: proxy.size.width)
+                    imageView(item: item, viewSize: imageSize)
                     contentView(item: item)
                 }
             }
@@ -51,9 +53,12 @@ private extension ItemDetailView {
     }
     
     func imageView(item: Item, viewSize: CGFloat) -> some View {
-        AsyncImageView(url: item.thumbnail, fill: true)
-            .frame(width: viewSize, height: viewSize)
-            .clipped()
+        VStack {
+            AsyncImageView(url: item.thumbnail, fill: true)
+                .frame(width: viewSize, height: viewSize)
+                .clipped()
+        }
+        .frame(maxWidth: .infinity)
     }
     
     func contentView(item: Item) -> some View {
