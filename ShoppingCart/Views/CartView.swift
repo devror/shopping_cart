@@ -14,6 +14,9 @@ struct CartView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
     
+    private var totalItems: Int { items.reduce(0) { $0 + $1.count } }
+    private var totalPrice: Int { items.reduce(0) { $0 + $1.price * $1.count } }
+    
     var body: some View {
         itemsListView
             .toolbar {
@@ -60,7 +63,7 @@ private extension CartView {
                 
                 Spacer()
                 
-                Text("2")
+                Text("\(totalItems)")
                     .font(.system(size: 16))
                     .foregroundStyle(Color("B3B3B3"))
             }
@@ -71,7 +74,7 @@ private extension CartView {
                 
                 Spacer()
                 
-                Text("$10")
+                Text("$\(totalPrice)")
                     .font(.system(size: 16))
                     .foregroundStyle(Color("B3B3B3"))
             }
@@ -82,7 +85,7 @@ private extension CartView {
                 
                 Spacer()
                 
-                Text("$20")
+                Text("$\(totalPrice)")
                     .font(.system(size: 20))
                     .foregroundStyle(Color("B3B3B3"))
             }
