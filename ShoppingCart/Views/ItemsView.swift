@@ -9,23 +9,39 @@ import SwiftUI
 
 struct ItemsView: View {
     
-    @State private var isCartViewPresented: Bool = false
-    @State private var isItemDetailViewPresented: Bool = false
+    @StateObject private var viewModel = ItemsViewModel()
     
-    private let items: [String] = (0..<10).map { ("Item_\($0)") }
+    @State private var isLoading = false
+    @State private var isCartViewPresented = false
+    @State private var isItemDetailViewPresented = false
     
     var body: some View {
-        itemsListView
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading, content: { titleView })
-                ToolbarItem(placement: .topBarTrailing, content: { cartButtonView })
+        Group {
+            if isLoading {
+                ProgressView()
+            } else {
+                if viewModel.items.isEmpty {
+                    Text("No Items")
+                } else {
+                    itemsListView
+                }
             }
-            .navigationDestination(isPresented: $isCartViewPresented, destination: {
-                CartView()
-            })
-            .sheet(isPresented: $isItemDetailViewPresented, content: {
-                ItemDetailView()
-            })
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading, content: { titleView })
+            ToolbarItem(placement: .topBarTrailing, content: { cartButtonView })
+        }
+        .navigationDestination(isPresented: $isCartViewPresented, destination: {
+            CartView()
+        })
+        .sheet(isPresented: $isItemDetailViewPresented, content: {
+            ItemDetailView()
+        })
+        .task {
+            isLoading = true
+            await viewModel.load()
+            isLoading = false
+        }
     }
 }
 
@@ -41,8 +57,8 @@ private extension ItemsView {
 
 private extension ItemsView {
     var itemsListView: some View {
-        List(items, id: \.self) { item in
-            ItemView()
+        List(viewModel.items) { item in
+            ItemView(item: item)
                 .listRowBackground(Color.white)
                 .onTapGesture {
                     isItemDetailViewPresented = true
@@ -50,7 +66,6 @@ private extension ItemsView {
         }
         .listStyle(.plain)
         .buttonStyle(.plain)
-        
         .padding(.vertical, 20)
     }
     
@@ -65,6 +80,7 @@ private extension ItemsView {
             Image(systemName: "cart")
                 .foregroundStyle(Color.black)
         }
+        .disabled(isLoading)
     }
 }
 

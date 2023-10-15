@@ -6,13 +6,21 @@
 //
 
 import Foundation
-import SwiftData
+//import SwiftData
 
-@Model
-final class Item {
-    var timestamp: Date
+//@Model
+
+struct Item: Decodable, Identifiable {
+    var id: Int
+    var title: String
+    var description: String
+    var thumbnail: String
+    var price: Int
     
-    init(timestamp: Date) {
-        self.timestamp = timestamp
-    }
+    
+    
+    
+//    init(timestamp: Date) {
+//        self.timestamp = timestamp
+//    }
 }

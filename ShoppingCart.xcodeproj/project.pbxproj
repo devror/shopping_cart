@@ -18,6 +18,7 @@
 		9DFBC3162ADBAA64004B3D67 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFBC3152ADBAA64004B3D67 /* CartView.swift */; };
 		9DFBC31A2ADBB42A004B3D67 /* ItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFBC3192ADBB42A004B3D67 /* ItemDetailView.swift */; };
 		9DFBC31C2ADBB61D004B3D67 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFBC31B2ADBB61D004B3D67 /* CloseButton.swift */; };
+		9DFBC31F2ADBBFAB004B3D67 /* ItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFBC31E2ADBBFAB004B3D67 /* ItemsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		9DFBC3152ADBAA64004B3D67 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		9DFBC3192ADBB42A004B3D67 /* ItemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailView.swift; sourceTree = "<group>"; };
 		9DFBC31B2ADBB61D004B3D67 /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
+		9DFBC31E2ADBBFAB004B3D67 /* ItemsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 		9DFBC2FC2ADB9913004B3D67 /* ShoppingCart */ = {
 			isa = PBXGroup;
 			children = (
+				9DFBC31D2ADBBFA2004B3D67 /* ViewModels */,
 				9DFBC3112ADBA29F004B3D67 /* Views */,
 				9DFBC2FD2ADB9913004B3D67 /* ShoppingCartApp.swift */,
 				9DFBC2FF2ADB9913004B3D67 /* ContentView.swift */,
@@ -102,6 +105,14 @@
 				9DFBC31B2ADBB61D004B3D67 /* CloseButton.swift */,
 			);
 			path = Subviews;
+			sourceTree = "<group>";
+		};
+		9DFBC31D2ADBBFA2004B3D67 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				9DFBC31E2ADBBFAB004B3D67 /* ItemsViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -183,6 +194,7 @@
 				9DFBC3142ADBA2E0004B3D67 /* ItemView.swift in Sources */,
 				9DFBC31C2ADBB61D004B3D67 /* CloseButton.swift in Sources */,
 				9DFBC30E2ADB9964004B3D67 /* ItemsView.swift in Sources */,
+				9DFBC31F2ADBBFAB004B3D67 /* ItemsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

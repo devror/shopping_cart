@@ -35,7 +35,7 @@ private extension CartView {
     
     var itemsListView: some View {
         List(items, id: \.self) { item in
-            ItemView(count: 1)
+            ItemView(count: 1, item: .init(id: 1, title: "t", description: "d", thumbnail: "", price: 1))
                 .listRowBackground(Color.white)
         }
         .listStyle(.plain)

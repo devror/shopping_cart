@@ -10,6 +10,8 @@ import SwiftUI
 struct ItemView: View {
     @State var count: Int = 0
     
+    let item: Item
+    
     var body: some View {
         HStack(alignment: .center, spacing: 16) {
             imageView
@@ -52,20 +54,29 @@ private extension ItemView {
 // MARK: - Subviews
 private extension ItemView {
     var imageView: some View {
-        Image("")
-            .frame(width: 58, height: 58)
-            .background(Color.secondary.opacity(0.5))
+        AsyncImage(url: URL(string: item.thumbnail)) { phase in
+            if let image = phase.image {
+                image
+                    .resizable()
+                    .scaledToFit()
+            } else if phase.error != nil {
+                Color.secondary.opacity(0.5)
+            } else {
+                ProgressView()
+            }
+        }
+        .frame(width: 58, height: 58)
     }
     
     var contentView: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("Key Holder")
+            Text(item.title)
                 .font(.system(size: 12, weight: .medium))
             
-            Text("$10")
+            Text("$\(item.price)")
                 .foregroundStyle(Color("B3B3B3"))
             
-            Text("Attractive DesignMetallic materialFour key hooksReliable & DurablePremium Quality")
+            Text(item.description)
         }
         .font(.system(size: 12))
         .padding(.vertical, 4)
@@ -104,5 +115,5 @@ private extension ItemView {
 }
 
 #Preview {
-    ItemView()
+    ItemView(item: .init(id: 1, title: "Title", description: "Description", thumbnail: "", price: 100))
 }
