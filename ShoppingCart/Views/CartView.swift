@@ -88,10 +88,7 @@ private extension CartView {
     }
     
     var closeButtonView: some View {
-        Button(action: { dismiss() }) {
-            Image(systemName: "xmark")
-                .foregroundStyle(Color.black)
-        }
+        CloseButton() { dismiss() }
     }
 }
 

@@ -10,6 +10,7 @@ import SwiftUI
 struct ItemsView: View {
     
     @State private var isCartViewPresented: Bool = false
+    @State private var isItemDetailViewPresented: Bool = false
     
     private let items: [String] = (0..<10).map { ("Item_\($0)") }
     
@@ -21,6 +22,9 @@ struct ItemsView: View {
             }
             .navigationDestination(isPresented: $isCartViewPresented, destination: {
                 CartView()
+            })
+            .sheet(isPresented: $isItemDetailViewPresented, content: {
+                ItemDetailView()
             })
     }
 }
@@ -40,6 +44,9 @@ private extension ItemsView {
         List(items, id: \.self) { item in
             ItemView()
                 .listRowBackground(Color.white)
+                .onTapGesture {
+                    isItemDetailViewPresented = true
+                }
         }
         .listStyle(.plain)
         .buttonStyle(.plain)
