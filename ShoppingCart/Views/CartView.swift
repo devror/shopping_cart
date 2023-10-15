@@ -27,6 +27,16 @@ struct CartView: View {
     }
 }
 
+// MARK: - Actions
+
+private extension CartView {
+    func removeFromCart(_ item: Item) {
+        withAnimation {
+            modelContext.delete(item)
+        }
+    }
+}
+
 // MARK: - Subviews
 
 private extension CartView {
@@ -45,6 +55,9 @@ private extension CartView {
             List(items, id: \.self) { item in
                 ItemView(item: item)
                     .listRowBackground(Color.white)
+                    .swipeActions {
+                        Button("Remove", role: .destructive, action: { removeFromCart(item) })
+                    }
             }
             .listStyle(.plain)
             .buttonStyle(.plain)
