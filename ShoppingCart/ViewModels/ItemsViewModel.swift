@@ -7,58 +7,33 @@
 
 import Foundation
 
-enum ItemsViewModelError: LocalizedError {
-    case cannotFetchItems
-    
-    var errorDescription: String? {
-        "Something went wrong. Please try again"
-    }
-}
-
 class ItemsViewModel: ObservableObject {
     
     @Published var items = [Item]()
     @Published var selectedItem: Item?
     
     @Published var isAlertPresented = false
-    @Published var error: ItemsViewModelError?
+    @Published var error: ItemsRepositoryError?
     
-    private let apiEndpointURL = "https://dummyjson.com/products"
-    
-    func load() async {
-        guard let url = URL(string: apiEndpointURL) else { return }
+    private let itemsRepository = ItemsRepository()
         
+    func load() async {
         do {
-            let (data, response) = try await URLSession.shared.data(from: url)
-            
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                presentError()
-                return
-            }
-            
-            let productsResponse = try JSONDecoder().decode(ProductsResponse.self, from: data)
+            let items = try await itemsRepository.fetchAll()
             
             DispatchQueue.main.async { [weak self] in
-                self?.items = productsResponse.products
+                self?.items = items
             }
         } catch {
-            presentError()
+            presentError(error as? ItemsRepositoryError)
         }
     }
     
-    private func presentError() {
+    private func presentError(_ error: ItemsRepositoryError?) {
         DispatchQueue.main.async { [weak self] in
             self?.isAlertPresented = true
-            self?.error = .cannotFetchItems
+            self?.error = error
             self?.items = []
         }
-    }
-}
-
-// MARK: - DTO
-
-private extension ItemsViewModel {
-    struct ProductsResponse: Decodable {
-        let products: [Item]
     }
 }

@@ -7,52 +7,33 @@
 
 import Foundation
 
-enum ItemDetailViewModelError: LocalizedError {
-    case cannotFetchItem
-    
-    var errorDescription: String? {
-        "Something went wrong. Please try again"
-    }
-}
-
 class ItemDetailViewModel: ObservableObject {
     
     @Published var item: Item?
     @Published var isLoading = false
     
     @Published var isAlertPresented = false
-    @Published var error: ItemDetailViewModelError?
+    @Published var error: ItemsRepositoryError?
     
     let itemID: Int
-    private let apiEndpointURL = "https://dummyjson.com/product"
+    private let itemsRepository = ItemsRepository()
     
     init(itemID: Int) {
         self.itemID = itemID
     }
     
     func load() async {
-        guard let url = URL(string: "\(apiEndpointURL)/\(itemID)") else { return }
-        
         await startLoading()
         
         do {
-            let (data, response) = try await URLSession.shared.data(from: url)
-            
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                await presentError()
-                return
-            }
-            
-            let item = try JSONDecoder().decode(Item.self, from: data)
+            let item = try await itemsRepository.fetch(id: itemID)
             
             DispatchQueue.main.async { [weak self] in
                 self?.item = item
                 self?.stopLoading()
             }
         } catch {
-            print("Error: \(error.localizedDescription)")
-            
-            await presentError()
+            await presentError(error as? ItemsRepositoryError)
             await stopLoading()
         }
     }
@@ -68,9 +49,9 @@ class ItemDetailViewModel: ObservableObject {
     }
     
     @MainActor
-    private func presentError() {
+    private func presentError(_ error: ItemsRepositoryError?) {
         isAlertPresented = true
-        error = .cannotFetchItem
+        self.error = error
         item = nil
     }
 }
